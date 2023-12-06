@@ -1,0 +1,7 @@
+#!/bin/bash
+
+SCRIPT_PATH="./capy_script.sh"
+
+chmod u+x ./capy_script.sh
+
+$SCRIPT_PATH "$@"
