@@ -3,5 +3,6 @@
 SCRIPT_PATH="./capy_script.sh"
 
 chmod u+x ./capy_script.sh
+chmod u+x ./capy_api.py
 
 $SCRIPT_PATH "$@"
