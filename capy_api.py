@@ -52,8 +52,6 @@ if __name__ == "__main__":
     option_content = sys.argv[3]
     print(command, command_result, option_content)
     
-    
-    
 
     # # Option Based Command - tf plan --Explain
     # explain_response = client.option_based_command("terraform plan", "explain", {"output": "tf plan output"}, {"repo": "content"})
