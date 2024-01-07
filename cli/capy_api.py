@@ -1,5 +1,12 @@
-import requests
+import os
+import openai
+import time
+import pandas as pd
 import sys
+import requests
+
+
+REQUEST_TOKEN = "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"
 
 class CopilotApiClient:
     def __init__(self, base_url):
@@ -8,7 +15,7 @@ class CopilotApiClient:
     def option_based_command(self, command, option, command_result):
         endpoint = f"{self.base_url}/capy"
         payload = {
-            "request_token": "randomized_token_generated",
+            "request_token": REQUEST_TOKEN,
             "command": command,
             "command_result": command_result,
             "option": option
@@ -19,7 +26,7 @@ class CopilotApiClient:
     def question_based_command(self, command, option_content, change_json):
         endpoint = f"{self.base_url}/capy"
         payload = {
-            "request_token": "randomized_token_generated",
+            "request_token": REQUEST_TOKEN,
             "command": command,
             "change_json": change_json,
             "option": "question",
@@ -34,7 +41,7 @@ class CopilotApiClient:
             response.raise_for_status()
             return response.json()
         except requests.exceptions.RequestException as e:
-            # print(f"Error making API request: {e}")
+            print(f"Error making API request: {e}")
             return None
 
 
