@@ -3,9 +3,17 @@ import os
 import pandas as pd
 import time
 
+# ChatGPT integration key: 
+OPENAI_SECRET_KEY = "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"
+
 class ChatBot:
-    def __init__(self):
-        self.client = OpenAI(api_key='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')
+    def __init__(self, option):
+        if option == "ChatGPT":
+            self.client = OpenAI(api_key=OPENAI_SECRET_KEY)
+        else:
+            # TODO: replace with LLM credentials / setup client
+            self.client = OpenAI(api_key=OPENAI_SECRET_KEY)
+            
     
     def make_request(self, msg_content, model="gpt-3.5-turbo"):
         messages = [{"role": "user", "content": msg_content}]
@@ -18,5 +26,7 @@ class ChatBot:
 
 # chatbot = ChatBot()
 # chatbot.make_request("Say this is a test!")
+
+
 
 
