@@ -24,7 +24,6 @@ class CopilotClient:
         else:
             print(f"Invalid command option: {e}")
             return None
-        
         print(msg_content)
         response = chatbot.make_request(msg_content)
         print(response)
@@ -33,8 +32,8 @@ class CopilotClient:
 # Script that takes command and option and then execute and returns results back to the users. 
 if __name__ == "__main__":
     client = CopilotClient()
-    print(len(sys.argv))
-
+    
+    # Validate system arguments
     if len(sys.argv) != 4 and len(sys.argv) != 5:
         print("Usage: python script.py <sys_command> <sys_command_output> <capy_command> <question (optional)>")
         sys.exit(1)
@@ -43,7 +42,6 @@ if __name__ == "__main__":
     sys_command_output = sys.argv[2]
     capy_command = sys.argv[3]
     question = sys.argv[4] if len(sys.argv) == 5 else None
-    print(sys_command, sys_command_output, capy_command)
 
     # This is a test and here is the test instruction
     # execute python capy_api.py "tf plan" "test" "explain"
