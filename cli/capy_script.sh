@@ -42,9 +42,6 @@ if [ -z "$output_file" ]; then
     output_file="output.txt"
 fi
 
-# Display the extracted input values
-echo "system command: $command_to_execute, capy command: $capy_command"
-
 # Execute command and save it to output file
 if [ "$command_to_execute" == "test" ]; then
     cat "test_input.txt" >"$output_file"
@@ -52,11 +49,9 @@ if [ "$command_to_execute" == "test" ]; then
 else
     eval "$command_to_execute" > "$output_file"
 fi
-echo "system command results saved to: $output_file"
 
 # Get system command output
 sys_command_output=$(cat "$output_file")
-echo "system command output: $sys_command_output"
 
 # Execute capy client
 echo "Execute capy command: python capy_api.py $command_to_execute <sys_command_output> $capy_command"
@@ -64,6 +59,5 @@ python capy_api.py "$command_to_execute" "$sys_command_output" "$capy_command"
 
 # Delete the output file
 rm "$output_file"
-echo "Deleted $output_file"
 
 
