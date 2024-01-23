@@ -42,6 +42,11 @@ if [ -z "$output_file" ]; then
     output_file="output.txt"
 fi
 
+# Default result file if not provided
+if [ -z "$result_file" ]; then
+    result_file="result.txt"
+fi
+
 # Execute command and save it to output file
 if [ "$command_to_execute" == "test" ]; then
     cat "test_input.txt" >"$output_file"
@@ -53,9 +58,12 @@ fi
 # Get system command output
 sys_command_output=$(cat "$output_file")
 
+
 # Execute capy client
 echo "Execute capy command: python capy_api.py $command_to_execute <sys_command_output> $capy_command"
-python capy_api.py "$command_to_execute" "$sys_command_output" "$capy_command"
+cat "$output_file"
+python capy_api.py "$command_to_execute" "$sys_command_output" "$capy_command" > "$result_file"
+
 
 # Delete the output file
 rm "$output_file"

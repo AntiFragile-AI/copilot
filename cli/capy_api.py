@@ -51,9 +51,8 @@ class CopilotClient:
             print(f"Invalid command option: {e}")
             return None
 
-        print(msg_content)
+        # print(msg_content)
         response = chatbot.make_request(msg_content)
-        print(response)
         return response
 
 # Script that takes command and option and then execute and returns results back to the users. 
@@ -76,7 +75,8 @@ if __name__ == "__main__":
         sys_output = FAKE_TEST_OUTPUT
     else:
         sys_output = sys_command_output
-    client.make_request_to_bot(sys_command, sys_output, capy_command, question)
+    response = client.make_request_to_bot(sys_command, sys_output, capy_command, question)
+    print(response)
     
     
     

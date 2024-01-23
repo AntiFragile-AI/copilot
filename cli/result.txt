@@ -1,0 +1,7 @@
+The given Terraform plan shows that Terraform will perform the following actions:
+
+1. Create a Docker container named "tutorial" using the "docker_container" resource. The container will have various configuration options such as attach, bridge, command, entrypoint, environment variables, hostname, image, IPC mode, log driver, logs, network data, read-only mode, remove volumes, restart policy, runtime, security options, shared memory size, start, stdin open, stop signal, stop timeout, TTY, wait, and wait timeout. Additionally, the container will have a port mapping from external port 8000 to internal port 80, with the IP address set to "0.0.0.0" and the protocol set to "tcp".
+
+2. Create a Docker image named "nginx" using the "docker_image" resource. The image will have an automatically generated ID and image ID. The image will not be kept locally, and the repository digest will be determined after applying the plan.
+
+The plan summary indicates that there are 2 resources to be added, 0 resources to be changed, and 0 resources to be destroyed.
