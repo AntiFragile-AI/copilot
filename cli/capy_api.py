@@ -43,6 +43,8 @@ class CopilotClient:
         chatbot = ChatBot("ChatGPT")
         if capy_command == "explain":
             msg_content += "Explain what it does"
+        elif capy_command == "impact":
+            msg_content += "Explain what the impact of this change"
         elif capy_command == "cost":
             msg_content += "Estimate how much it woulld cost"
         elif capy_command == "question":
