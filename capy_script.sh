@@ -6,7 +6,7 @@
 
 # Function to display usage information
 display_usage() {
-    echo "Usage: $0 --command <command_value> --option <option_value>"
+    echo "Usage: capy --command <command_value> --option <option_value>"
     exit 1
 }
 
@@ -60,7 +60,7 @@ echo "system command output: $sys_command_output"
 
 # Execute capy client
 echo "Execute capy command: python capy_api.py $command_to_execute <sys_command_output> $capy_command"
-python capy_api.py "$command_to_execute" "$sys_command_output" "$capy_command"
+python lib/capy_api.py "$command_to_execute" "$sys_command_output" "$capy_command"
 
 # Delete the output file
 rm "$output_file"
