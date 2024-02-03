@@ -3,7 +3,7 @@ import openai
 import time
 import pandas as pd
 import sys
-from chatbot import ChatBot
+from lib.chatbot import ChatBot
 
 class CopilotClient:
     def __init__(self):
