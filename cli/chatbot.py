@@ -5,7 +5,7 @@ import time
 
 class ChatBot:
     def __init__(self):
-        self.client = OpenAI(api_key='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')
+        self.client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
     
     def make_request(self, msg_content, model="gpt-3.5-turbo"):
         messages = [{"role": "user", "content": msg_content}]

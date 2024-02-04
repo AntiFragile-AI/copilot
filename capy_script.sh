@@ -60,8 +60,7 @@ echo "system command output: $sys_command_output"
 
 # Execute capy client
 echo "Execute capy command: python capy_api.py $command_to_execute <sys_command_output> $capy_command"
-chmod u+x lib/capy_api.py
-python lib/capy_api.py "$command_to_execute" "$sys_command_output" "$capy_command"
+python cli/capy_api.py "$command_to_execute" "$sys_command_output" "$capy_command"
 
 # Delete the output file
 rm "$output_file"
