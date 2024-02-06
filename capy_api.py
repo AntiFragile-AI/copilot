@@ -4,6 +4,7 @@ import time
 import pandas as pd
 import sys
 from chatbot import ChatBot
+from copilot_client import CopilotClient
 
 class CopilotClient:
     def __init__(self):
