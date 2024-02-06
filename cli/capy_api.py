@@ -34,41 +34,58 @@ if __name__ == "__main__":
     client = CopilotClient()
     
     # Validate system arguments
-    if len(sys.argv) != 4 and len(sys.argv) != 5:
+    if len(sys.argv) < 2 or len(sys.argv) > 5:
         print("Usage: python script.py <sys_command> <sys_command_output> <capy_command> <question (optional)>")
         sys.exit(1)
+        
+    # run capy question command.
+    if len(sys.argv) == 2:
+        question = sys.argv[1]
+        # call client repo.
+    
+     
+    # run capy setup command.   
+    elif len(sys.argv) == 3:
+        if sys.argv[1] == "setup":
+            github_link = sys.argv[2]
+            # call client repo
+        else:
+            print("Usage: python script.py <sys_command> <sys_command_output> <capy_command> <question (optional)>")
+            sys.exit(1)    
+        
 
-    sys_command = sys.argv[1]
-    sys_command_output = sys.argv[2]
-    capy_command = sys.argv[3]
-    question = sys.argv[4] if len(sys.argv) == 5 else None
+    elif len(sys.argv) == 4 or len(sys.argv == 5):
+        sys_command = sys.argv[1]
+        sys_command_output = sys.argv[2]
+        capy_command = sys.argv[3]
+        question = sys.argv[4] if len(sys.argv) == 5 else None
 
-    # This is a test and here is the test instruction
-    # execute python capy_api.py "tf plan" "test" "explain"
-    # execute python capy_api.py "tf plan" "test" "cost"
-    # execute python capy_api.py "tf plan" "test" "question" "what does this tf plan do?"
-    sys_output = ""
-    if sys_command_output == "test":
-        sys_output = """
-            Terraform will perform the following actions:
+        # This is a test and here is the test instruction
+        # execute python capy_api.py "tf plan" "test" "explain"
+        # execute python capy_api.py "tf plan" "test" "cost"
+        # execute python capy_api.py "tf plan" "test" "question" "what does this tf plan do?"
+        sys_output = ""
+        if sys_command_output == "test":
+            sys_output = """
+                Terraform will perform the following actions:
 
-              # azurerm_resource_group.tf-plan will be created
-              + resource "azurerm_resource_group" "tf-plan" {
-                  + id       = (known after apply)
-                  + location = "centralus"
-                  + name     = "rg-tf-plan-example-centralus"
-                  + tags     = {
-                      + "name" = "test"
+                  # azurerm_resource_group.tf-plan will be created
+                  + resource "azurerm_resource_group" "tf-plan" {
+                      + id       = (known after apply)
+                      + location = "centralus"
+                      + name     = "rg-tf-plan-example-centralus"
+                      + tags     = {
+                          + "name" = "test"
+                        }
                     }
-                }
 
-            Plan: 1 to add, 0 to change, 0 to destroy.
-            """
-    else:
-        sys_output = sys_command_output
-    
-    
-    client.make_request_to_bot(sys_command, sys_output, capy_command, question)
+                Plan: 1 to add, 0 to change, 0 to destroy.
+                """
+        else:
+            sys_output = sys_command_output
+        
+        
+        client.make_request_to_bot(sys_command, sys_output, capy_command, question)
     
     
     
