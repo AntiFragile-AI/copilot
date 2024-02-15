@@ -3,6 +3,7 @@ import openai
 import time
 import pandas as pd
 import sys
+from chatbot import ChatBot
 from copilot_client import CopilotClient
 
 # Script that takes command and option and then execute and returns results back to the users. 
