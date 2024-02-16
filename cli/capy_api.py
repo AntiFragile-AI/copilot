@@ -9,28 +9,34 @@ from copilot_client import CopilotClient
 # Script that takes command and option and then execute and returns results back to the users. 
 if __name__ == "__main__":
     client = CopilotClient()
+    chatbot = ChatBot()
     
     # Validate system arguments
     if len(sys.argv) < 2 or len(sys.argv) > 5:
         print("Usage: python script.py <sys_command> <sys_command_output> <capy_command> <question (optional)>")
         sys.exit(1)
         
-    # run capy question command.
-    if len(sys.argv) == 2:
-        question = sys.argv[1]
-        # call client repo.
-    
-     
+        
     # run capy setup command.   
-    elif len(sys.argv) == 3:
+    if len(sys.argv) == 3:
         if sys.argv[1] == "setup":
-            github_link = sys.argv[2]
-            # call client repo
+            repo_link = sys.argv[2]
+            # TODO[tina]: pass link argument
+            chatbot.setup()
         else:
             print("Usage: python script.py <sys_command> <sys_command_output> <capy_command> <question (optional)>")
-            sys.exit(1)    
+            sys.exit(1) 
+    
+        
+    # run capy question command.
+    elif len(sys.argv) == 2:
+        question = sys.argv[1]
+        # TODO[tina]: remove the first setup step.
+        chatbot.setup()
+        chatbot.make_spencer_request(question)   
         
 
+    # run command with cli interface.
     elif len(sys.argv) == 4 or len(sys.argv == 5):
         sys_command = sys.argv[1]
         sys_command_output = sys.argv[2]

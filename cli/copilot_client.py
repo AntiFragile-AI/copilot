@@ -7,14 +7,13 @@ from chatbot import ChatBot
 
 class CopilotClient:
     def __init__(self):
-        pass
+        self.chatbot = ChatBot()
 
     def make_request_to_bot(self, sys_command, sys_command_output, capy_command, question=None):
         msg_content = "Given the following " + sys_command + ": \n";
         msg_content += sys_command_output
         msg_content += "\n"
 
-        chatbot = ChatBot()
         if capy_command == "explain":
             msg_content += "Explain what it does"
         elif capy_command == "cost":
@@ -25,6 +24,7 @@ class CopilotClient:
             print(f"Invalid command option: {e}")
             return None
         print(msg_content)
-        response = chatbot.make_request(msg_content)
+        response = self.chatbot.make_request(msg_content)
         print(response)
         return response
+        

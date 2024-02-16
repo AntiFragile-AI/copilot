@@ -21,7 +21,23 @@ def read_f(file_path):
 class ChatBot:
     def __init__(self):
         # self.client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+        self.openai_client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+        self.redis_client = None
+        self.embedder = None
+        self.spencer_client = None
         
+    
+    def make_request(self, msg_content, model="gpt-3.5-turbo"):
+        messages = [{"role": "user", "content": msg_content}]
+        response = self.client .chat.completions.create(
+            model=model,
+            messages=messages,
+            temperature=0)
+        response_msg = response.choices[0].message.content
+        return response_ms
+        
+    
+    def setup(self):
         self.redis_client = redis.Redis(host='localhost', port=6379, decode_responses=True)
         self.openai_client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
         self.embedder = Embedder(
@@ -44,32 +60,27 @@ class ChatBot:
             key_prefix=C.REDIS_KEY_PREFIX,
             knn=50,
         )
-        
     
-    def make_request(self, msg_content, model="gpt-3.5-turbo"):
-        messages = [{"role": "user", "content": msg_content}]
-        response = self.client .chat.completions.create(
-            model=model,
-            messages=messages,
-            temperature=0)
-        response_msg = response.choices[0].message.content
-        return response_ms
+    
+    def make_spencer_request(self, question):
+        if self.redis_client == None:
+            raise Exception("haven't done setup yet")
+        
+        print(question)
+        resp = self.spencer_client.answer(question)
+        print(resp)
+        
         
 
-chatbot = ChatBot()
-# chatbot.make_request("Say this is a test!")
+# chatbot = ChatBot()
+# chatbot.setup()
 
-
-question = "Can you explain what this terraform do?\n\n" 
-# + read_f(
-#     C.QUESTION_AUGMENTATION_PATH
-# )
-print(question)
-resp = chatbot.spencer_client.answer(question)
-print(resp)
+# question = "Can you explain what this terraform do?\n\n" 
+# print(question)
+# resp = chatbot.spencer_client.answer(question)
+# print(resp)
 # markdown2html = markdown2.markdown(resp)
 # print(jsonify(markdown2html))
-
 
 
 # sample input terraform data.
