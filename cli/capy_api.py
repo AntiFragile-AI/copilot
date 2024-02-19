@@ -15,26 +15,20 @@ if __name__ == "__main__":
     if len(sys.argv) < 2 or len(sys.argv) > 5:
         print("Usage: python script.py <sys_command> <sys_command_output> <capy_command> <question (optional)>")
         sys.exit(1)
-        
-        
+
     # run capy setup command.   
     if len(sys.argv) == 3:
         if sys.argv[1] == "setup":
             repo_link = sys.argv[2]
-            # TODO[tina]: pass link argument
-            chatbot.setup()
+            chatbot.setup(repo_link)
         else:
             print("Usage: python script.py <sys_command> <sys_command_output> <capy_command> <question (optional)>")
             sys.exit(1) 
-    
-        
+
     # run capy question command.
     elif len(sys.argv) == 2:
         question = sys.argv[1]
-        # TODO[tina]: remove the first setup step.
-        chatbot.setup()
         chatbot.make_spencer_request(question)   
-        
 
     # run command with cli interface.
     elif len(sys.argv) == 4 or len(sys.argv == 5):

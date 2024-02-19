@@ -25,8 +25,7 @@ class ChatBot:
         self.redis_client = None
         self.embedder = None
         self.spencer_client = None
-        
-    
+
     def make_request(self, msg_content, model="gpt-3.5-turbo"):
         messages = [{"role": "user", "content": msg_content}]
         response = self.client .chat.completions.create(
@@ -35,20 +34,21 @@ class ChatBot:
             temperature=0)
         response_msg = response.choices[0].message.content
         return response_ms
-        
-    
-    def setup(self):
+
+    def setup(self, local_path):
         self.redis_client = redis.Redis(host='localhost', port=6379, decode_responses=True)
-        self.openai_client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
         self.embedder = Embedder(
             self.redis_client,
             self.openai_client,
             "text-embedding-3-small",
-            C.KNOWLEDGE_DIR,
+            local_path,
             key_prefix=C.REDIS_KEY_PREFIX,
             max_tokens=2000,
         )
         print(f"Embedding success? {self.embedder()}")
+    
+    def make_spencer_request(self, question):
+        self.redis_client = redis.Redis(host='localhost', port=6379, decode_responses=True)
         self.spencer_client = Spencer(
             self.redis_client,
             self.openai_client,
@@ -60,9 +60,6 @@ class ChatBot:
             key_prefix=C.REDIS_KEY_PREFIX,
             knn=50,
         )
-    
-    
-    def make_spencer_request(self, question):
         if self.redis_client == None:
             raise Exception("haven't done setup yet")
         
