@@ -17,12 +17,12 @@ if __name__ == "__main__":
         sys.exit(1)
         
         
-    # run capy setup command.   
+    # run capy setup command.  
     if len(sys.argv) == 3:
         if sys.argv[1] == "setup":
+            # test local path: C.KNOWLEDGE_DIR
             repo_link = sys.argv[2]
-            # TODO[tina]: pass link argument
-            chatbot.setup()
+            chatbot.setup(repo_link)
         else:
             print("Usage: python script.py <sys_command> <sys_command_output> <capy_command> <question (optional)>")
             sys.exit(1) 
@@ -32,8 +32,10 @@ if __name__ == "__main__":
     elif len(sys.argv) == 2:
         question = sys.argv[1]
         # TODO[tina]: remove the first setup step.
-        chatbot.setup()
-        chatbot.make_spencer_request(question)   
+        # chatbot.setup()
+        print("DEBUG: start question")
+        chatbot.make_spencer_request(question)  
+        print("DEBUG: end question") 
         
 
     # run command with cli interface.
